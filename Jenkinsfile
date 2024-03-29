@@ -8,7 +8,7 @@ pipeline {
   stages {
     stage('Clone') {
       steps {
-        git branch: 'springs', url: 'https://github.com/Techchhiv/i4jenkins.git'
+        git branch: 'main', url: 'https://github.com/Leangkimlong/jenkinsTest.git'
       }
     }
     stage('Build') {
