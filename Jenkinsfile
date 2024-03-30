@@ -1,8 +1,8 @@
 pipeline {
     agent any
-
+    
     tools {
-        gradle 'Gradle87' // Use the correct Gradle tool name
+        gradle 'Gradle87'
     }
 
     stages {
@@ -11,19 +11,33 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/Leangkimlong/jenkinsTest.git'
             }
         }
-        stage('Build') {
-            steps {
-                sh './gradlew build' // This assumes the Gradle wrapper is present
+        stage('Build'){
+            steps{
+                sh 'gradle clean build'
+            }
+        }
+        stage('Test'){
+            steps{
+                sh 'gradle test'
             }
         }
     }
-
-    post {
+    post{
         success {
-            // Additional steps to perform on successful build
+            // Send email notification for success
+            emailext (
+                to: 'mizterlong95@example.com',
+                subject: 'Pipeline Success',
+                body: 'Your Jenkins pipeline has completed successfully.'
+            )
         }
         failure {
-            // Additional steps to perform on build failure
+            // Send email notification for failure
+            emailext (
+                to: 'mizterlong95@example.com',
+                subject: 'Pipeline Failure',
+                body: 'Your Jenkins pipeline has failed. Please check the logs for details.'
+            )
         }
     }
 }
