@@ -7,9 +7,12 @@ plugins {
 group = 'i4.jenkins'
 version = '0.0.1-SNAPSHOT'
 
+// For Groovy syntax (build.gradle)
 java {
-	sourceCompatibility = '21'
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
+
 
 repositories {
 	mavenCentral()
